@@ -67,17 +67,27 @@ var allChoosers = [sideChooser, mainChooser, dessertChooser, wholeMealChooser]
 var recommendedRecipe
 
 //EVENT LISTENERS:
-//this will trigger the output to display:
 letsCookBtn.addEventListener("click", generateRandom1)
-// clearBtn.addEventListener("click", clearOutput)
+clearBtn.addEventListener("click", clearOutput)
+for (var i = 0; i < allChoosers.length; i++) {
+  allChoosers[i].addEventListener("click", showButton)
+}
 
 //FUNCTIONS:
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length)
 }
-//NEW FUNCTION:
-//get the chooser that's selected:
+
+function atLeastOneRadio() {
+    console.log(($('input[type=radio]:checked').size() > 0));
+}
+
+function showButton() {
+  letsCookBtn.classList.remove("transparent")
+}
+
 function generateRandom1(event) {
+  var numChecked = 0
   for (var i = 0; i < allChoosers.length; i++) {
     if (allChoosers[i].checked) {
       var dishType = allChoosers[i].id
@@ -108,7 +118,9 @@ function renderRecipe() {
   outputBoxMain.classList.add("hidden")
   results.innerText = recommendedRecipe
 }
-//
-// function clearOutput() {
-//   results.innerText = ""
-//
+
+function clearOutput() {
+  results.innerText = ""
+  outputBox.classList.add("hidden")
+  outputBoxMain.classList.remove("hidden")
+}

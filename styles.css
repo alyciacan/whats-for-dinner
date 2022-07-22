@@ -69,6 +69,7 @@ main {
   margin-top: 60px;
   flex-direction: column;
   text-align: center;
+  min-height: 200px;
 }
 
 .output-box-btn {
@@ -80,6 +81,10 @@ main {
 
 .hidden {
   display: none!important;
+}
+
+.transparent {
+  opacity: 0%
 }
 
 img {

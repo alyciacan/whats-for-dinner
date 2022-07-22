@@ -25,6 +25,6 @@ Alycia Canavan
 
 ## Links
 [Project Specs](https://frontend.turing.edu/projects/module-1/dinner.html)   
-[Deploy Link]
+[Deploy Link](https://alyciacan.github.io/whats-for-dinner/)
 
 

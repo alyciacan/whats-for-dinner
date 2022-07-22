@@ -65,50 +65,50 @@ var dessertChooser = document.querySelector("#desserts")
 var wholeMealChooser = document.querySelector("#entire-meal")
 var allChoosers = [sideChooser, mainChooser, dessertChooser, wholeMealChooser]
 var recommendedRecipe
+
 //EVENT LISTENERS:
-//add event listener to each radio button:
-for (var i = 0; i < allChoosers.length; i++) {
-  allChoosers[i].addEventListener("input", generateRandom)
-}
-
 //this will trigger the output to display:
-letsCookBtn.addEventListener("click", displayRandom)
+letsCookBtn.addEventListener("click", generateRandom1)
 // clearBtn.addEventListener("click", clearOutput)
-
 
 //FUNCTIONS:
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length)
 }
-
-function generateRandom(event) {
-  var dishType = event.target.id
-  if (dishType === "entire-meal") {
-    var wholeMeal = { main: mains[getRandomIndex(mains)],
-      side: sides[getRandomIndex(sides)],
-      dessert: desserts[getRandomIndex(desserts)] }
-      recommendedRecipe = `${wholeMeal.main} with a side of ${wholeMeal.side}
-      and ${wholeMeal.dessert} for dessert!`
-    } else if (dishType === "sides") {
-      recommendedRecipe = sides[getRandomIndex(sides)]
-    } else if (dishType === "mains") {
-      recommendedRecipe = mains[getRandomIndex(mains)]
-    } else if (dishType === "desserts") {
-      recommendedRecipe = desserts[getRandomIndex(desserts)]
+//NEW FUNCTION:
+//get the chooser that's selected:
+function generateRandom1(event) {
+  for (var i = 0; i < allChoosers.length; i++) {
+    if (allChoosers[i].checked) {
+      var dishType = allChoosers[i].id
+      if (dishType === "sides") {
+        recommendedRecipe = sides[getRandomIndex(sides)]
+        renderRecipe()
+      } else if (dishType === "mains") {
+        recommendedRecipe = mains[getRandomIndex(mains)]
+        renderRecipe()
+      } else if (dishType === "desserts") {
+        recommendedRecipe = desserts[getRandomIndex(desserts)]
+        renderRecipe()
+      } else if (dishType === "entire-meal") {
+        var wholeMeal = {
+          main: mains[getRandomIndex(mains)],
+          side: sides[getRandomIndex(sides)],
+          dessert: desserts[getRandomIndex(desserts)]
+        }
+          recommendedRecipe = `${wholeMeal.main} with a side of ${wholeMeal.side} and ${wholeMeal.dessert} for dessert!`
+          renderRecipe()
+      }
     }
   }
-  //need to refactor so that button click is what triggers generation and rendering of results
+}
 
-function displayRandom() {
+function renderRecipe() {
   outputBox.classList.remove("hidden")
   outputBoxMain.classList.add("hidden")
   results.innerText = recommendedRecipe
-
-  //hide output box main
-  //unhide output box hidden
-  //add results of generateRandom
 }
-
-//find out which radio btn user clicked on
-//assign that to a variable (userSelection)
-// that selection will determine which random thing is generated
+//
+// function clearOutput() {
+//   results.innerText = ""
+//

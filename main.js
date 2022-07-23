@@ -68,7 +68,7 @@ var allChoosers = [sideChooser, mainChooser, dessertChooser, wholeMealChooser]
 
 
 //EVENT LISTENERS:
-letsCookBtn.addEventListener("click", generateRandom1)
+letsCookBtn.addEventListener("click", generateRandom)
 clearBtn.addEventListener("click", clearOutput)
 for (var i = 0; i < allChoosers.length; i++) {
   allChoosers[i].addEventListener("click", showButton)
@@ -83,7 +83,7 @@ function showButton() {
   letsCookBtn.classList.remove("transparent")
 }
 
-function generateRandom1(event) {
+function generateRandom(event) {
   var numChecked = 0
   for (var i = 0; i < allChoosers.length; i++) {
     if (allChoosers[i].checked) {

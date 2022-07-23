@@ -1,4 +1,4 @@
-//arrays of dishes here:
+//DATA MODEL:
 var sides = ['Miso Glazed Carrots',
 'Coleslaw',
 'Garden Salad',
@@ -51,8 +51,9 @@ var mains = ["Spaghetti and Meatballs",
 "Margarita Pizza",
 "Korean Glazed Meatloaf",
 "Cajun Salmon"]
+var recommendedRecipe
 
-//selectors:
+//SELECTORS:
 var resultsText = document.querySelector("#results")
 var outputBox = document.querySelector("#output-box")
 var outputBoxMain = document.querySelector("#output-box-main")
@@ -64,10 +65,10 @@ var mainChooser = document.querySelector("#mains")
 var dessertChooser = document.querySelector("#desserts")
 var wholeMealChooser = document.querySelector("#entire-meal")
 var allChoosers = [sideChooser, mainChooser, dessertChooser, wholeMealChooser]
-var recommendedRecipe
+
 
 //EVENT LISTENERS:
-letsCookBtn.addEventListener("click", generateRandom1)
+letsCookBtn.addEventListener("click", generateRandom)
 clearBtn.addEventListener("click", clearOutput)
 for (var i = 0; i < allChoosers.length; i++) {
   allChoosers[i].addEventListener("click", showButton)
@@ -78,15 +79,11 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length)
 }
 
-function atLeastOneRadio() {
-    console.log(($('input[type=radio]:checked').size() > 0));
-}
-
 function showButton() {
   letsCookBtn.classList.remove("transparent")
 }
 
-function generateRandom1(event) {
+function generateRandom(event) {
   var numChecked = 0
   for (var i = 0; i < allChoosers.length; i++) {
     if (allChoosers[i].checked) {
@@ -114,9 +111,13 @@ function generateRandom1(event) {
 }
 
 function renderRecipe() {
-  outputBox.classList.remove("hidden")
-  outputBoxMain.classList.add("hidden")
-  results.innerText = recommendedRecipe
+  if (outputBox.classList.contains("hidden")) {
+    outputBox.classList.remove("hidden")
+    outputBoxMain.classList.add("hidden")
+    results.innerText = recommendedRecipe
+  } else {
+    results.innerText = recommendedRecipe
+  }
 }
 
 function clearOutput() {
